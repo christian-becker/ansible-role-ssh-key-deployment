@@ -1,38 +1,63 @@
-Role Name
-=========
+ssh-key-deployment
+==================
 
-A brief description of the role goes here.
+This ansible role is to deploy ssh keys. 
+Place the ssh key files to "./files/*.pub" inside this role. These keys are deployed (added) to the target user on target systems. 
+If you set "deploy_exclusive" to "yes", all keys not specified will be removed. So you can make sure that no unwanted key remains on the systems. 
+
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role has no special requirements.
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Here is a list of variables defined in **defaults/main.yml**: 
+
+# exclusive - Whether to remove all other non-specified keys from the authorized_keys file. (no/yes)
+deploy_exclusive: no
+
+# key - The SSH public key(s), as a string or (since Ansible 1.9) url (https://github.com/username.keys).
+deploy_key: "*.pub"
+
+# state - Whether the given key (with the given key_options) should or should not be in the file. (present/absent)
+deploy_state: present
+
+# user - The username on the remote host whose authorized_keys file will be modified.
+deploy_user: 
+  - root
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role has no dependencies.
+
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role can be used e.g. with the following playbook:
+```
+---
+- name: deploy ssh keys
+  hosts: linux_server
+  remote_user: root
+  roles:
+    - ssh-key-deployment
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
 License
 -------
 
-BSD
+MIT
+
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+* **Christian Becker** - [christian-becker](https://github.com/christian-becker)  
+

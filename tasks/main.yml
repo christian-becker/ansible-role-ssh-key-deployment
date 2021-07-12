@@ -1,2 +1,15 @@
 ---
 # tasks file for ssh-key-deployment
+#
+# This task deploys ssh keys on linux systems. 
+#
+
+- name: deploy ssh key
+  authorized_key:
+    exclusive: "{{ deploy_exclusive }}"
+    key: "{{ lookup('file', item) }}"
+    state: "{{ deploy_state }}"
+    user: "{{ deploy_user }}"
+  with_fileglob:
+    - "{{ deploy_key }}"
+
