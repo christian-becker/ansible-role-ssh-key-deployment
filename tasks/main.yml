@@ -4,12 +4,17 @@
 # This task deploys ssh keys on linux systems. 
 #
 
-- name: deploy ssh key
-  authorized_key:
-    exclusive: "{{ deploy_exclusive }}"
-    key: "{{ lookup('file', item) }}"
-    state: "{{ deploy_state }}"
-    user: "{{ deploy_user }}"
+- name: get and merge all ssh keys
+  debug:
+    msg: "{{ lookup('file', item) }}"
   with_fileglob:
     - "{{ deploy_key }}"
+  register: deploy_key_list
+
+- name: deploy ssh keys
+  authorized_key:
+    exclusive: "{{ deploy_exclusive }}"
+    key: "{{ deploy_key_list.results | map(attribute='msg') | join('\n') }}"
+    state: "{{ deploy_state }}"
+    user: "{{ deploy_user }}"
 
