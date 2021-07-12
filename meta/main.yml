@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: ssh_key_deployment
   author: Christian Becker
   description: ssh key deployment - add keys to target systems (and optional remove unspecified keys)
   license: MIT
