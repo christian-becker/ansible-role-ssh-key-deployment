@@ -12,4 +12,3 @@ deploy_state: present
 
 # user - The username on the remote host whose authorized_keys file will be modified.
 deploy_user: root
-

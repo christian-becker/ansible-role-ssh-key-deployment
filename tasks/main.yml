@@ -1,7 +1,7 @@
 ---
 # tasks file for ssh-key-deployment
 #
-# This task deploys ssh keys on linux systems. 
+# This task deploys ssh keys on linux systems.
 #
 
 - name: get and merge all ssh keys
@@ -17,4 +17,3 @@
     key: "{{ deploy_key_list.results | map(attribute='msg') | join('\n') }}"
     state: "{{ deploy_state }}"
     user: "{{ deploy_user }}"
-
