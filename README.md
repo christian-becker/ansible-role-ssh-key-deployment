@@ -49,7 +49,7 @@ This role can be used e.g. with the following playbook:
   hosts: linux_server
   remote_user: root
   roles:
-    - ssh-key-deployment
+    - ssh_key_deployment
 ```
 
 
