@@ -1,10 +1,10 @@
 galaxy_info:
   role_name: ssh_key_deployment
-  author: Christian Becker
+  author: christian_becker
   description: ssh key deployment - add keys to target systems (and optional remove unspecified keys)
   license: MIT
 
-  min_ansible_version: 2.1
+  min_ansible_version: 2.9
 
   galaxy_tags:
     - ssh

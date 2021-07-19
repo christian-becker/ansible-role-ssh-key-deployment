@@ -19,17 +19,16 @@ Here is a list of variables defined in **defaults/main.yml**:
 
 ```
 # exclusive - Whether to remove all other non-specified keys from the authorized_keys file. (no/yes)
-deploy_exclusive: no
+ssh_key_deployment_exclusive: no
 
 # key - The SSH public key(s), as a string or (since Ansible 1.9) url (https://github.com/username.keys).
-deploy_key: "*.pub"
+ssh_key_deployment_key: "*.pub"
 
 # state - Whether the given key (with the given key_options) should or should not be in the file. (present/absent)
-deploy_state: present
+ssh_key_deployment_state: present
 
 # user - The username on the remote host whose authorized_keys file will be modified.
-deploy_user: 
-  - root
+ssh_key_deployment_user: root
 ```
 
 
@@ -49,7 +48,7 @@ This role can be used e.g. with the following playbook:
   hosts: linux_server
   remote_user: root
   roles:
-    - ssh_key_deployment
+    - christian_becker.ssh_key_deployment
 ```
 
 

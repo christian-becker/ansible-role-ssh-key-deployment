@@ -1,19 +1,19 @@
 ---
-# tasks file for ssh-key-deployment
+# tasks file for ssh_key_deployment
 #
 # This task deploys ssh keys on linux systems.
 #
 
 - name: get and merge all ssh keys
-  debug:
+  ansible.builtin.debug:
     msg: "{{ lookup('file', item) }}"
   with_fileglob:
-    - "{{ deploy_key }}"
-  register: deploy_key_list
+    - "{{ ssh_key_deployment_key }}"
+  register: ssh_key_deployment_key_list
 
 - name: deploy ssh keys
-  authorized_key:
-    exclusive: "{{ deploy_exclusive }}"
-    key: "{{ deploy_key_list.results | map(attribute='msg') | join('\n') }}"
-    state: "{{ deploy_state }}"
-    user: "{{ deploy_user }}"
+  ansible.posix.authorized_key:
+    exclusive: "{{ ssh_key_deployment_exclusive }}"
+    key: "{{ ssh_key_deployment_key_list.results | map(attribute='msg') | join('\n') }}"
+    state: "{{ ssh_key_deployment_state }}"
+    user: "{{ ssh_key_deployment_user }}"
