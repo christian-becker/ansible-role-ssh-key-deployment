@@ -4,7 +4,7 @@ galaxy_info:
   description: ssh key deployment - add keys to target systems (and optional remove unspecified keys)
   license: MIT
 
-  min_ansible_version: 2.9
+  min_ansible_version: 2.10
 
   galaxy_tags:
     - ssh
